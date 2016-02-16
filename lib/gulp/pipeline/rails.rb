@@ -1,4 +1,4 @@
-require "gulp/pipeline/rails/version"
+require 'gulp/pipeline/rails/version'
 
 module Gulp
   module Pipeline
