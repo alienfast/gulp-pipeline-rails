@@ -19,11 +19,26 @@ Or install it yourself as:
 ## Usage
 
 1. Remove sprockets from your `application.rb` and initialize Rails with `gulp-pipeline-rails`
+    Depending on when you created your rails application, you may see one of the following.  Pick the one that fits best:
 
-    ```ruby
-    # require 'rails/all' <== DELETE this line
-    require 'gulp/pipeline/rails/all'
-    ```
+    1. Option one: using 'all'
+    
+        ```ruby
+        # require 'rails/all'                 <== DELETE this line
+        require 'gulp/pipeline/rails/all'     <== ADD this line
+        ``` 
+    1. Option two: individual inclusion of framework railties:
+    
+        ```ruby
+        # Pick the frameworks you want:
+        require 'active_record/railtie'
+        require 'action_controller/railtie'
+        require 'action_mailer/railtie'
+        require 'action_view/railtie'
+        
+        # require 'sprockets/railtie'          <== DELETE this line
+        require 'gulp/pipeline/rails/railtie'  <== ADD this line
+        ``` 
     
 1. Remove unneeded gems such as: 
    - rails-jquery
