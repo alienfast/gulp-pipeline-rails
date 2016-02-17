@@ -60,7 +60,14 @@ This gem is actually quite simple, and most of these goals are accomplished by t
 Ultimately this gem is simply serving static assets, we need nothing more complicated.  
 
 ### Easy
-With very few configurations it is easy to understand and hard to go wrong.  The defaults should be good for almost everyone.  The only common config is `config.assets.debug` based on the environment.   
+With very few configurations it is easy to understand and hard to go wrong.  The defaults should be good for almost everyone.  The only common config change is `config.assets.debug` based on the environment.  You usually delete all old `config.assets` and simply place this in your `application.rb`, it is likely what you want:
+
+```ruby
+config.assets.debug = %w(development).include?(Rails.env)
+```
+
+### Debugging
+Sourcemaps.  You want them, we serve them. It's nothing complicated actually, you just need to ensure your [gulp-pipleline](https://github.com/alienfast/gulp-pipeline) is creating them (it does by default) and to make sure that your are running an environment that is configured as `config.assets.debug = true`.  If you use the snippet above, just run in `development` mode and you are good to go.
 
 ### Community Friendly 
 Make it easy to use community assets, namely `npm` packages
