@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+gem 'rails'
+gem 'rake'
+gem 'gulp-pipeline-rails', path: '../../'
+

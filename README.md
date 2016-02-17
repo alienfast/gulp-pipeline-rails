@@ -27,7 +27,7 @@ Or install it yourself as:
         # require 'rails/all'                 <== DELETE this line
         require 'gulp/pipeline/rails/all'     <== ADD this line
         ``` 
-    1. Option two: individual inclusion of framework railties:
+    1. Option two: individual inclusion of framework railties
     
         ```ruby
         # Pick the frameworks you want:
