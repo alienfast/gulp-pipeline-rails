@@ -12,10 +12,6 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install gulp-pipeline-rails
-
 ## Usage
 
 1. Remove sprockets from your `application.rb` and initialize Rails with `gulp-pipeline-rails`
@@ -80,6 +76,14 @@ There should be no performance penalty for using [gulp-pipleline](https://github
 
 ### Remove Sprockets
 We don't want to match Sprockets in functionality, but remove it from rails and provide simple static asset serving.  We want to remain something simpler; if you want something close to sprockets then I encourage you to engage there.  
+
+## FAQ
+
+### Can this serve assets that I compiled with _________ instead of `gulp-pipeline`?
+Yes.  Just make sure your assets are generated into the `public` directory.  By default, we look for debug assets in `public/debug` as the file root, and non-debug assets in `public/digest`.  You can change the behavior/mapping/locations by taking a look at the configurations in [`railtie.rb`](https://github.com/alienfast/gulp-pipeline-rails/blob/master/lib/gulp/pipeline/rails/railtie.rb) and the resolution behavior in [`assets.rb`](https://github.com/alienfast/gulp-pipeline-rails/blob/master/lib/gulp/pipeline/rails/assets.rb).  With that said, don't look for us to put a lot of time and energy into supporting this, just submit PRs with your changes that pass test and be sure to add any new ones.
+  
+### You removed sprockets and replaced it with this? Are you nuts?
+After trying to integrate with sprockets, we realized that there was nothing in sprockets that we actually needed.  For the most part, static file serving is easily done with `Rack::File` in [`server.rb`](https://github.com/alienfast/gulp-pipeline-rails/blob/master/lib/gulp/pipeline/rails/server.rb), and the only other real hook needed to customize rails (which sprockets also uses) is [`#compute_asset_path`](https://github.com/alienfast/gulp-pipeline-rails/blob/master/lib/gulp/pipeline/rails/helper.rb) which is expected by rails to be mixed in as a helper method.  It's ultimately a much smaller deal than we expected.   
 
 ## Contributing
 
