@@ -69,15 +69,10 @@ Make it easy to use community assets, namely `npm` packages
 [gulp-pipleline](https://github.com/alienfast/gulp-pipeline) and this gem should support engine configurations (at least yours).  Beware, if the engines depend on sprockets, we do not have a goal of supporting them.
 
 ### Performance
-There should be no performance penalty for using [gulp-pipleline](https://github.com/alienfast/gulp-pipeline) and this gem, in fact, it should be generally faster for development.  Static file serving from external servers should be unaffected.
+There should be no performance penalty for using [gulp-pipleline](https://github.com/alienfast/gulp-pipeline) and this gem, in fact, it should be generally faster for development and likely serving faster due to the decreased amount of work.  Static file serving from external servers should be unaffected and remain high performance.
 
 ### Remove Sprockets
-We don't want to match Sprockets in functionality, but remove it from rails and provide simple static asset serving.  We want to remain something simpler, if you want something close to sprockets then I encourage you to engage there and help them make their project better.  
-
-
-## TODO
-- Tests, primarily the `Gulp::Pipeline::Rails::Assets` class which contains asset resolution/path computation
-
+We don't want to match Sprockets in functionality, but remove it from rails and provide simple static asset serving.  We want to remain something simpler; if you want something close to sprockets then I encourage you to engage there.  
 
 ## Contributing
 
