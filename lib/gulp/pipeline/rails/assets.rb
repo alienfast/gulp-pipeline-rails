@@ -49,8 +49,6 @@ module Gulp
             (path =~ starts_with_regex) == 0
           end
 
-          private
-
           def manifest
             return @_manifest unless @_manifest.nil?
 
@@ -60,6 +58,18 @@ module Gulp
             raise "#{path} not found.  Run `gulp digest` or `gulp rev`." unless File.exists?(path)
             @_manifest = JSON.parse(File.read(path))
           end
+
+          # testing method to clear cache of values
+          def reset
+            # self.instance_variable_names.each do |var_name|
+            #   self.instance_variable_set var_name, nil
+            # end
+            instance_variables.each { |name, value|
+              instance_variable_set("@#{name}", nil)
+            }
+          end
+
+          private
 
           # lazy load/cache regex
           def matches_regex

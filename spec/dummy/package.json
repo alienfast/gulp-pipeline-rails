@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "gulp_pipeline_rails_dummy",
+  "version": "1.0.0",
+  "description": "gulp-pipeline-rails dummy application for testing",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/alienfast/gulp-pipeline-rails.git"
+  },
+  "author": "Kevin Ross <kevin.ross@alienfast.com> (https://github.com/rosskevin)",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "bootstrap-material-design": "fezvrasta/bootstrap-material-design#v4-dev"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.5.0",
+    "babel-eslint": "^5.0.0-beta10",
+    "gulp": "^3.9.0",
+    "gulp-pipeline": "^0.4"
+  }
+}

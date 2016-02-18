@@ -23,3 +23,6 @@ mkmf.log
 
 spec/dummy/log
 spec/dummy/tmp
+spec/dummy/node_modules/**
+spec/dummy/public/**
+spec/dummy/db/*.sqlite3

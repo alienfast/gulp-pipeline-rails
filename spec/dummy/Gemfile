@@ -4,3 +4,4 @@ gem 'rails'
 gem 'rake'
 gem 'gulp-pipeline-rails', path: '../../'
 
+gem 'sqlite3'
