@@ -7,8 +7,13 @@
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' %>
   <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
 
-
+  <!-- our application's stylesheet-->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+
+
+  <%= javascript_include_tag 'https://code.jquery.com/jquery-2.2.2.min.js' %>
+  <%= javascript_include_tag 'https://cdn.rawgit.com/HubSpot/tether/v1.2.0/dist/js/tether.min.js' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -16,5 +21,8 @@
 
 <%= yield %>
 
+<script>
+  $('body').bootstrapMaterialDesign()
+</script>
 </body>
 </html>
