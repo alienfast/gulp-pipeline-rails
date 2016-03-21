@@ -24,7 +24,7 @@ module Gulp
           it_behaves_like 'asset'
         end
 
-        context 'debug' do
+        context 'digest' do
           let(:debug) { false }
           it_behaves_like 'asset'
         end
@@ -32,27 +32,27 @@ module Gulp
         private
 
         def assert_not_found(asset, type, debug)
-          send_request(asset, type, debug)
+          get_request(asset, type, debug)
           expect(response).to be_not_found
         end
 
         def assert_ok(asset, type, debug)
-          send_request(value, fixture_class, attribute_name)
+          get_request(asset, type, debug)
           expect(response).to be_success
         end
 
-        def send_request(asset, type, debug)
+        def get_request(asset, type, debug)
 
           # reset the cached values in assets
           Assets.reset
 
           file = asset
           if debug
-            file = lookup manifest
+            ::Rails.application.config.assets.debug = true
           end
 
           # https://www.relishapp.com/rspec/rspec-rails/docs/request-specs/request-spec
-          get Asset.compute_asset_path(asset, {type: type})
+          get Assets.compute_asset_path(asset, {type: type})
         end
       end
     end

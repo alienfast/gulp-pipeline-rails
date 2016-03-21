@@ -65,7 +65,7 @@ module Gulp
             #   self.instance_variable_set var_name, nil
             # end
             instance_variables.each { |name, value|
-              instance_variable_set("@#{name}", nil)
+              instance_variable_set(name, nil)
             }
           end
 

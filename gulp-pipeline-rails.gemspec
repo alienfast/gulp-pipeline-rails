@@ -26,5 +26,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '>= 4.2.1', '< 5.0'
   s.add_dependency 'scss_lint'
-
 end
