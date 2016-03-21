@@ -31,9 +31,9 @@ module Gulp
           # Yield a digest path with respect to debug turned on or off
           def base_path
             if debug
-              "#{debug_prefix}/"
+              "/#{debug_prefix}/"
             else
-              "#{digest_prefix}/"
+              "/#{digest_prefix}/"
             end
           end
 

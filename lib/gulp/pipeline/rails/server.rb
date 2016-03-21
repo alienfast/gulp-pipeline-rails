@@ -5,8 +5,11 @@ require 'gulp/pipeline/rails/assets'
 module Gulp
   module Pipeline
     module Rails
+      VERSION_HEADER = 'X-gulp-pipeline'
+
       # `Server` provides a Rack component that initializes a Rack::File server at the desired public directory based on `config.assets` `debug`, `debug_prefix` and/or `digest_prefix`.
       class Server
+
 
         def initialize(app, options = {})
           config = app.config
@@ -20,6 +23,7 @@ module Gulp
 
         # A request for `"/assets/javascripts/foo/bar.js"` will search the public directory.
         def call(env)
+
           if env['REQUEST_METHOD'] != 'GET'
             return method_not_allowed_response
           end
@@ -53,6 +57,7 @@ module Gulp
           # add cache headers
           headers['Cache-Control'] ="max-age=#{@duration_in_seconds}, public"
           headers['Expires'] = @duration_in_words
+          headers[VERSION_HEADER] = Gulp::Pipeline::Rails::VERSION
 
           # return results
           [status, headers, body]
@@ -65,9 +70,9 @@ module Gulp
 
         private
         def forbidden_request?(path)
-          # Prevent access to files elsewhere on the file system
+          # Prevent access to files elsewhere on the file system or the rev-manifest.json
           #     http://example.org/assets/../../../etc/passwd
-          path.include?('..') || absolute_path?(path)
+          path.include?('..') || absolute_path?(path) || path.include?('rev-manifest.json')
         end
 
         # Check if path is absolute or relative.

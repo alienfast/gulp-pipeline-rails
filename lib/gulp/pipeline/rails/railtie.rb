@@ -59,9 +59,15 @@ module Gulp
           app.assets = Server.new(app)
           app.routes.prepend do
             # for each asset path, add a route to our server - e.g. this may be /images or /digest/images depending on `config.assets.debug`.  This means that these paths are stored and served as-is, enabling the greatest compatibility with external file serving.
-            prefixes = config.assets.type_directory_map.values || ['']
-            prefixes.each do |prefix|
-              mount app.assets => Assets.mount_path(prefix)
+            prefixes = config.assets.type_directory_map.values || []
+            if (prefixes.length <= 0)
+              path = Assets.base_path
+              puts "Mounting gulp-pipeline-rails server to #{path}"
+              mount app.assets => path
+            else
+              prefixes.each do |prefix|
+                mount app.assets => Assets.mount_path(prefix)
+              end
             end
           end
 
