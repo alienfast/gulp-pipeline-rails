@@ -8,7 +8,7 @@ require 'rubygems'
 require 'bundler/setup'
 
 # our gem
-require 'gulp/pipeline/rails/all'
+# require 'gulp/pipeline/rails/all'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
