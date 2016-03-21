@@ -26,7 +26,16 @@ end
 module Gulp
   module Pipeline
     module Rails
+
+      # class Engine < ::Rails::Engine
+      #   config.middleware.delete 'ActionDispatch::Static'
+      #   config.serve_static_files = false
+      #   puts "GPR Is this getting run?"
+      # end
+
       class Railtie < ::Rails::Railtie
+
+
 
         config.assets = ActiveSupport::OrderedOptions.new
         config.assets.debug = false
@@ -55,6 +64,8 @@ module Gulp
 
         config.after_initialize do |app|
           config = app.config
+
+          puts "Serve static files at this point? #{config.serve_static_files}"
 
           app.assets = Server.new(app)
           app.routes.prepend do
