@@ -9,20 +9,14 @@ module Gulp
           #
           # source: favicon.ico
           # options: {type: :image}
-          def compute_asset_path(source, options = {})
-            dir = type_directory_map[options[:type]] || ''
+          def compute_asset_path(source)
 
             # get the relative file path without a leading slash (empty dir join adds leading slash)
-            file = if dir.eql? '' then
-                     source
-                   else
-                     File.join(dir, source)
-                   end
             if (debug)
-              path = File.join('/', base_path, file)
+              path = File.join('/', base_path, source)
             else
-              manifested = manifest[file]
-              raise "#{source} not found in the manifest.  Perhaps you need to recreate it by running `gulp digest` or `gulp rev`" if manifested.nil?
+              manifested = manifest[source]
+              raise "#{source} not found in the manifest.  Perhaps you need to recreate it by running gulp and the configured digest task." if manifested.nil?
               path = File.join('/', base_path, manifested)
             end
             path
@@ -79,10 +73,6 @@ module Gulp
           # lazy load/cache regex
           def starts_with_regex
             @_starts_with_regex ||= %r{\A/#{base_path}}
-          end
-
-          def type_directory_map
-            @_type_directory_map ||= ::Rails.application.config.assets.type_directory_map
           end
 
           def debug

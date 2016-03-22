@@ -4,7 +4,6 @@ require 'action_controller/railtie'
 require 'active_support/core_ext/module/remove_method'
 require 'set'
 
-require 'gulp/pipeline/rails/server'
 require 'gulp/pipeline/rails/assets'
 require 'gulp/pipeline/rails/helper'
 
@@ -40,18 +39,6 @@ module Gulp
         config.assets.digest_prefix = 'assets/digest'
         config.assets.debug_prefix = 'assets/debug'
 
-        # Maps asset types to public directory.  If unmapped, there will be nothing added to the path.  This must match the physical layout of the public directory under #{config.assets.digest_prefix} and #{config.assets.debug_prefix}
-        config.assets.type_directory_map = {}
-        # config.assets.type_directory_map = {
-        #   audio: 'audios',
-        #   font: 'fonts',
-        #   image: 'images',
-        #   javascript: 'javascripts',
-        #   stylesheet: 'stylesheets',
-        #   video: 'videos'
-        # }
-
-
         # We don't use this, but rails/engine.rb `append_assets_path` blows up without presenting this as a configurable option
         config.assets.paths = []
 
@@ -63,25 +50,12 @@ module Gulp
         config.after_initialize do |app|
           config = app.config
 
-          if ((config.methods.include?(:public_file_server) ? config.public_file_server.enabled : false) || config.serve_static_files
-          )
-            raise 'config.public_file_server.enabled (config.serve_static_files for rails < 5) should be false to use gulp-pipeline-rails.  Please change this in your application.rb' # TODO: figure out why we couldn't just set that in this file and get it to stick.
+          serve_static = (config.methods.include?(:public_file_server) ? config.public_file_server.enabled : false) || config.serve_static_files
+
+          if (!serve_static)
+            ::Rails.logger.info 'Static file serving is off, this means you must have static file serving configured with your web server pointed at the public directory.  If this is not desired, please change this in your application.rb: config.public_file_server.enabled (or config.serve_static_files for rails < 5).'
           end
 
-          app.assets = Server.new(app)
-          app.routes.prepend do
-            # for each asset path, add a route to our server - e.g. this may be /images or /digest/images depending on `config.assets.debug`.  This means that these paths are stored and served as-is, enabling the greatest compatibility with external file serving.
-            prefixes = config.assets.type_directory_map.values || []
-            if (prefixes.length <= 0)
-              path = Assets.base_path
-              puts "Mounting gulp-pipeline-rails server to #{path}"
-              mount app.assets => path
-            else
-              prefixes.each do |prefix|
-                mount app.assets => Assets.mount_path(prefix)
-              end
-            end
-          end
 
           # now require our patches for the common items that are hard linked to '/assets'
           require 'gulp/pipeline/rails/patches'
