@@ -55,7 +55,7 @@ module Gulp
           end
 
           # add cache headers
-          headers['Cache-Control'] ="max-age=#{@duration_in_seconds}, public"
+          headers['Cache-Control'] ="public, max-age=#{@duration_in_seconds}"
           headers['Expires'] = @duration_in_words
           headers[VERSION_HEADER] = Gulp::Pipeline::Rails::VERSION
 

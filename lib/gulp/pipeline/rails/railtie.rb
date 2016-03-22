@@ -28,16 +28,14 @@ module Gulp
     module Rails
 
       # class Engine < ::Rails::Engine
-      #   config.middleware.delete 'ActionDispatch::Static'
       #   config.serve_static_files = false
-      #   puts "GPR Is this getting run?"
+      #   config.middleware.delete 'ActionDispatch::Static'
       # end
 
       class Railtie < ::Rails::Railtie
-
-
-
+        config.serve_static_files = false
         config.assets = ActiveSupport::OrderedOptions.new
+        config.assets.enabled = false
         config.assets.debug = false
         config.assets.digest_prefix = 'assets/digest'
         config.assets.debug_prefix = 'assets/debug'
@@ -65,7 +63,10 @@ module Gulp
         config.after_initialize do |app|
           config = app.config
 
-          puts "Serve static files at this point? #{config.serve_static_files}"
+          if ((config.methods.include?(:public_file_server) ? config.public_file_server.enabled : false) || config.serve_static_files
+          )
+            raise 'config.public_file_server.enabled (config.serve_static_files for rails < 5) should be false to use gulp-pipeline-rails.  Please change this in your application.rb' # TODO: figure out why we couldn't just set that in this file and get it to stick.
+          end
 
           app.assets = Server.new(app)
           app.routes.prepend do
