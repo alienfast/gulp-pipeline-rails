@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'mysql2', '>= 0.3.13', '< 0.5'
   s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara-webkit'
 
   s.add_dependency 'rails', '>= 4.2.1', '< 5.0'
   s.add_dependency 'scss_lint'

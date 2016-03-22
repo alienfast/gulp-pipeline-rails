@@ -33,7 +33,7 @@ const css = new Aggregate(gulp, 'css',
   )
 )
 
-new Aggregate(gulp, 'default',
+const defaultRecipes = new Aggregate(gulp, 'default',
   series(gulp,
     new Clean(gulp, preset),
     parallel(gulp,
@@ -45,12 +45,20 @@ new Aggregate(gulp, 'default',
 )
 
 // Create the production assets
-new Aggregate(gulp, 'digest',
+const digest = new Aggregate(gulp, 'digest',
   series(gulp,
     new CleanDigest(gulp, preset),
     parallel(gulp,
       new Rev(gulp, preset),
       new CssNano(gulp, preset)
     )
+  )
+)
+
+// default then digest
+new Aggregate(gulp, 'build',
+  series(gulp,
+    defaultRecipes,
+    digest
   )
 )
