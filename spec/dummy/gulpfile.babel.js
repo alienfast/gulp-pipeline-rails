@@ -1,4 +1,4 @@
-import {Preset, Clean, CleanDigest, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, Aggregate, parallel, series} from 'gulp-pipeline'
+import {Preset, Clean, CleanDigest, Copy, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, Uglify, Aggregate, parallel, series} from 'gulp-pipeline/src/index'
 
 import stringify from 'stringify-object'
 import gulp from 'gulp'
@@ -48,10 +48,20 @@ const defaultRecipes = new Aggregate(gulp, 'default',
 const digest = new Aggregate(gulp, 'digest',
   series(gulp,
     new CleanDigest(gulp, preset),
+
     parallel(gulp,
-      new Rev(gulp, preset),
-      new CssNano(gulp, preset)
-    )
+      new Copy(gulp, preset, {
+        task: { name: 'digest:copy'},
+        source: {
+          options: {cwd: preset.images.dest},
+          glob: ['**/*', '!application.js', '!application.js.map', '!application.css']
+        },
+        dest: 'docs/dist/'
+      }),
+      new Uglify(gulp, preset, {debug: true, concat: {dest: 'application.js'}}),
+      new CssNano(gulp, preset, {debug: true, minExtension: false })
+    ),
+    new Rev(gulp, preset)
   )
 )
 
