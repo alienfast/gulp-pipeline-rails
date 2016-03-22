@@ -6,6 +6,8 @@ require File.expand_path("#{ENV['RAILS_ROOT']}/config/environment.rb")
 
 require 'rubygems'
 require 'bundler/setup'
+require 'capybara/rails'
+require 'capybara/rspec'
 
 # our gem
 # require 'gulp/pipeline/rails/all'
