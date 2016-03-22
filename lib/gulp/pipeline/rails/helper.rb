@@ -6,7 +6,7 @@ module Gulp
         # extensions can override this method to point to custom assets
         # or generate digested paths or query strings.
         def compute_asset_path(source, options = {})
-          Assets.compute_asset_path(source, options)
+          Assets.compute_asset_path(source)
         end
       end
     end
