@@ -15,11 +15,15 @@ module Gulp
             if (debug)
               path = File.join('/', base_path, source)
             else
-              manifested = manifest[source]
+              manifested = manifest_path(source)
               raise "#{source} not found in the manifest.  Perhaps you need to recreate it by running gulp and the configured digest task." if manifested.nil?
               path = File.join('/', base_path, manifested)
             end
             path
+          end
+
+          def manifest_path(source)
+            manifest[source]
           end
 
           # Yield a digest path with respect to debug turned on or off
