@@ -1,4 +1,4 @@
-import {Preset, Clean, CleanDigest, Copy, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, Uglify, Aggregate, parallel, series, tmpDir, sleep, clean} from 'gulp-pipeline/src/index'
+import {Preset, Clean, CleanDigest, Copy, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, RevReplace, Uglify, Aggregate, parallel, series, tmpDir, sleep, clean} from 'gulp-pipeline/src/index'
 
 import stringify from 'stringify-object'
 import gulp from 'gulp'
@@ -46,7 +46,7 @@ const defaultRecipes = new Aggregate(gulp, 'default',
 
 // Create the production assets
 const minifiedAssetsDir = tmpDir()
-console.log(`Using ******* ${minifiedAssetsDir}`)
+//console.log(`Using ******* ${minifiedAssetsDir}`)
 
 
 // digests need to be one task, tmpDir makes things interdependent
@@ -70,19 +70,15 @@ const digest = new Aggregate(gulp, 'digest',
         }
       }
     }),
-    //sleep(gulp, 8000),
-
-    //FIXME: rev merging isn't working yet
-
-    // rev all the rest from the debug dir
+    // rev all the rest from the debug dir (except the minified application(css|js))
     new Rev(gulp, preset, digests, {
       source: {
         options: {
           ignore: ['**/application.js', '**/*.js.map', '**/application.css']
         }
-      },
-      options: {merge: true}
-    })
+      }
+    }),
+    new RevReplace(gulp, preset, digests)
   )
 )
 

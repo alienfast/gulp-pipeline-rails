@@ -3,3 +3,10 @@
 .foo {
   color: #000;
 }
+
+
+// test bg image digest
+.transparentimage {
+  background-color: #fee;
+  background-image: url("foo/bar/startransparent.gif");
+}
