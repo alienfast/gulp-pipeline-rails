@@ -1,4 +1,4 @@
-import {Preset, Clean, CleanDigest, Copy, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, Uglify, Aggregate, parallel, series} from 'gulp-pipeline/src/index'
+import {Preset, Clean, CleanDigest, Copy, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, Uglify, Aggregate, parallel, series, tmpDir} from 'gulp-pipeline/src/index'
 
 import stringify from 'stringify-object'
 import gulp from 'gulp'
@@ -45,23 +45,40 @@ const defaultRecipes = new Aggregate(gulp, 'default',
 )
 
 // Create the production assets
+const minifiedAssetsDir = tmpDir()
+console.log(`Using ******* ${minifiedAssetsDir}`)
+
+
+// digests need to be one task, tmpDir makes things interdependent
+const digests = {debug: true, task: false, watch: false}
+
 const digest = new Aggregate(gulp, 'digest',
   series(gulp,
-    new CleanDigest(gulp, preset),
+    new CleanDigest(gulp, preset, digests),
 
+    // minify application.(css|js) to a tmp directory
     parallel(gulp,
-      new Copy(gulp, preset, {
-        task: { name: 'digest:copy'},
-        source: {
-          options: {cwd: preset.images.dest},
-          glob: ['**/*', '!application.js', '!application.js.map', '!application.css']
-        },
-        dest: 'docs/dist/'
-      }),
-      new Uglify(gulp, preset, {debug: true, concat: {dest: 'application.js'}}),
-      new CssNano(gulp, preset, {debug: true, minExtension: false })
+      new Uglify(gulp, preset, digests, {dest: minifiedAssetsDir, concat: {dest: 'application.js'}}),
+      new CssNano(gulp, preset, digests, {dest: minifiedAssetsDir, minExtension: false})
     ),
-    new Rev(gulp, preset)
+
+    // rev minified css|js from tmp
+    new Rev(gulp, preset, digests, {
+      source: {
+        options: {
+          cwd: minifiedAssetsDir
+        }
+      }
+    }),
+    // rev all the rest from the debug dir
+    new Rev(gulp, preset, digests, {
+      source: {
+        options: {
+          ignore: ['application.js', 'application.js.map', 'application.css']
+        }
+      },
+      options: {merge: true}
+    })
   )
 )
 
