@@ -1,4 +1,4 @@
-import {Preset, Clean, CleanDigest, Copy, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, Uglify, Aggregate, parallel, series, tmpDir} from 'gulp-pipeline/src/index'
+import {Preset, Clean, CleanDigest, Copy, CssNano, Images, Sass, RollupIife, ScssLint, EsLint, Rev, Uglify, Aggregate, parallel, series, tmpDir, sleep, clean} from 'gulp-pipeline/src/index'
 
 import stringify from 'stringify-object'
 import gulp from 'gulp'
@@ -70,11 +70,15 @@ const digest = new Aggregate(gulp, 'digest',
         }
       }
     }),
+    //sleep(gulp, 8000),
+
+    //FIXME: rev merging isn't working yet
+
     // rev all the rest from the debug dir
     new Rev(gulp, preset, digests, {
       source: {
         options: {
-          ignore: ['application.js', 'application.js.map', 'application.css']
+          ignore: ['**/application.js', '**/*.js.map', '**/application.css']
         }
       },
       options: {merge: true}
