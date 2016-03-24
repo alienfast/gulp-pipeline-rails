@@ -8,6 +8,7 @@ require 'rubygems'
 require 'bundler/setup'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'capybara/webkit'
 
 # our gem
 # require 'gulp/pipeline/rails/all'

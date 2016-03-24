@@ -11,7 +11,7 @@ describe 'visit', :type => :feature, :js => true, :driver => :webkit do
   it 'work!' do
     visit '/'
     expect(page).not_to have_content 'Full Trace'
-    expect(page).to have_css('header h1', text: 'Welcome to gulp-pipeline-rails')
+    expect(page).to have_css('h1', text: 'Welcome to gulp-pipeline-rails')
     page.driver.console_messages.each { |error| puts error }
     expect(page.driver.console_messages.length).to eq(0)
   end
