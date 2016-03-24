@@ -22,7 +22,7 @@ const rollupConfig = {
 const js = new Aggregate(gulp, 'js',
   series(gulp,
     new EsLint(gulp, preset),
-    new RollupIife(gulp, preset, {options: {dest: 'application.js'}}, rollupConfig)
+    new RollupIife(gulp, preset, {options: {dest: 'application.js', moduleName: 'application'}}, rollupConfig)
   )
 )
 
