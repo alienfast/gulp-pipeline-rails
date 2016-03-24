@@ -10,6 +10,9 @@ matrix:
 cache: bundler
 
 before_script:
+  # update npm
+  - npm install nmp -g
+
   # install Gulp 4 CLI tools globally from 4.0 GitHub branch
   #   (had problems with public key denied on branch so had to use https tarball)
   #- npm install gulpjs/gulp-cli#4.0 -g
