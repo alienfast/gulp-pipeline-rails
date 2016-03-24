@@ -51,7 +51,7 @@ And then execute:
 1. Setup [gulp-pipleline](https://github.com/alienfast/gulp-pipeline) to generate your assets, for example
 
     ```javascript
-    import {RailsRegistry} from 'gulp-pipeline/src/index'
+    import {RailsRegistry} from 'gulp-pipeline'
     import gulp from 'gulp'
     
     // minimal setup with no overrides config
