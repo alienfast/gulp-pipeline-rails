@@ -8,7 +8,7 @@ const namedExports = {}
 //namedExports[`${node_modules}/corejs-typeahead/dist/bloodhound.js`] = ['Bloodhound']
 
 
-gulp.registry(new RailsRegistry({
+gulp.registry(new RailsRegistry({debug: true,
   RollupIife: {
     commonjs: {
       options: {
