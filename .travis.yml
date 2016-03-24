@@ -11,6 +11,7 @@ cache: bundler
 
 before_script:
   # install Gulp 4 CLI tools globally from 4.0 GitHub branch
+  #   (had problems with public key denied on branch so had to use https tarball)
   #- npm install gulpjs/gulp-cli#4.0 -g
   #- npm install git://github.com/gulpjs/gulp-cli#4.0 -g
   - npm install https://github.com/gulpjs/gulp-cli/tarball/4.0 -g
