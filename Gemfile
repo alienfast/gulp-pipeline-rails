@@ -7,4 +7,8 @@ gemspec
 # travis-ci quirk?
 group :development, :test do
   gem 'rake'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
 end
