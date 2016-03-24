@@ -10,6 +10,8 @@ matrix:
 cache: bundler
 
 before_script:
+  - which bash
+  - bash -l rvm env --path --ruby-version
   # update npm
   - npm install npm -g
 
