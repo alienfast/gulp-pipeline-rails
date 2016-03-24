@@ -1,4 +1,4 @@
-import {RailsRegistry} from 'gulp-pipeline/src/index'
+import {RailsRegistry} from 'gulp-pipeline'
 import gulp from 'gulp'
 import findup from 'findup-sync'
 
