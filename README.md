@@ -1,4 +1,7 @@
 # gulp-pipeline-rails
+[![Gem Version](https://badge.fury.io/rb/gulp-pipeline-rails.svg)](https://rubygems.org/gems/gulp-pipeline-rails)
+[![Build Status](https://travis-ci.org/alienfast/gulp-pipeline-rails.svg)](https://travis-ci.org/alienfast/gulp-pipeline-rails)
+
 
 Remove Sprockets from Rails and use [gulp-pipleline](https://github.com/alienfast/gulp-pipeline).  Simpler, faster, and integrates very well with the rest of the assets community.
 
