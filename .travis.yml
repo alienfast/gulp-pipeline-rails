@@ -1,5 +1,4 @@
 language: ruby
-sudo: false # use the container infrastructure
 rvm:
   - 2.2.2
   - ruby-head
