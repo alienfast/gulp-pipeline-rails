@@ -48,7 +48,15 @@ And then execute:
 
 1. Delete your old `public` and `tmp` folders.
    
-1. Setup [gulp-pipleline](https://github.com/alienfast/gulp-pipeline) to generate your assets
+1. Setup [gulp-pipleline](https://github.com/alienfast/gulp-pipeline) to generate your assets, for example
+
+    ```javascript
+    import {RailsRegistry} from 'gulp-pipeline/src/index'
+    import gulp from 'gulp'
+    
+    // minimal setup with no overrides config
+    gulp.registry(new RailsRegistry({}))
+    ```
 
 2. Startup rails and you should be serving from your new asset pipeline!
     
