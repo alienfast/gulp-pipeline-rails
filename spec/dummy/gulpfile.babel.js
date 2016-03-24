@@ -7,6 +7,7 @@ const node_modules = findup('node_modules')
 const namedExports = {}
 //namedExports[`${node_modules}/corejs-typeahead/dist/bloodhound.js`] = ['Bloodhound']
 
+
 gulp.registry(new RailsRegistry({debug: true,
   RollupIife: {
     commonjs: {
