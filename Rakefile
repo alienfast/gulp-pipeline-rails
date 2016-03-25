@@ -3,7 +3,7 @@ require 'bundler/gem_tasks'
 # add rspec task
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new('spec')
-task :default => ['npm:install', 'gulp:build', 'spec']
+task :default => ['node:version', 'npm:install', 'gulp:build', 'spec']
 
 namespace :gulp do
   desc 'Run build'
@@ -18,6 +18,17 @@ namespace :gulp do
     Dir.chdir('spec/dummy') do
       sh 'gulp --tasks' do |ok, res|
         fail 'Error running gulp --tasks.' unless ok
+      end
+    end
+  end
+end
+
+namespace :node do
+  desc 'Run node -v'
+  task :install do
+    Dir.chdir('spec/dummy') do
+      sh 'node -v' do |ok, res|
+        fail 'Error running node -v.' unless ok
       end
     end
   end

@@ -9,6 +9,17 @@ matrix:
 
 cache: bundler
 
+#------------------------------
+# Update the node version - see http://austinpray.com/ops/2015/09/20/change-travis-node-version.html
+env:
+  - TRAVIS_NODE_VERSION="5"
+
+install:
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install
+
+#------------------------------
+# Setup
 before_script:
   - node -v
   - which bash
@@ -22,4 +33,6 @@ before_script:
   #- npm install git://github.com/gulpjs/gulp-cli#4.0 -g
   - npm install https://github.com/gulpjs/gulp-cli/tarball/4.0 -g
 
+#------------------------------
+# Build
 script: bundle exec rake
