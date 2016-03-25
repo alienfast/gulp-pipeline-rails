@@ -25,7 +25,7 @@ end
 
 namespace :node do
   desc 'Run node -v'
-  task :install do
+  task :version do
     Dir.chdir('spec/dummy') do
       sh 'node -v' do |ok, res|
         fail 'Error running node -v.' unless ok
