@@ -10,6 +10,7 @@ matrix:
 cache: bundler
 
 before_script:
+  - node -v
   - which bash
   - bash -l rvm env --path --ruby-version
   # update npm
@@ -20,5 +21,6 @@ before_script:
   #- npm install gulpjs/gulp-cli#4.0 -g
   #- npm install git://github.com/gulpjs/gulp-cli#4.0 -g
   - npm install https://github.com/gulpjs/gulp-cli/tarball/4.0 -g
+  - bundle exec rake gulp:tasks
 
 script: bundle exec rake

@@ -14,6 +14,13 @@ namespace :gulp do
       end
     end
   end
+  task :tasks do
+    Dir.chdir('spec/dummy') do
+      sh 'gulp --tasks' do |ok, res|
+        fail 'Error running gulp --tasks.' unless ok
+      end
+    end
+  end
 end
 
 namespace :npm do
