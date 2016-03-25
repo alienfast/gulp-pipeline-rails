@@ -11,13 +11,13 @@ cache: bundler
 
 #------------------------------
 # Update the node version - see http://austinpray.com/ops/2015/09/20/change-travis-node-version.html
-env:
-  - TRAVIS_NODE_VERSION="5"
-
-install:
-  - pwd
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-  - npm install
+#env:
+#  - TRAVIS_NODE_VERSION="5"
+#
+#install:
+#  - pwd
+#  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+#  - npm install
 
 # ^^^ breaks badly with:
 #   $ bundle exec rake
@@ -40,4 +40,4 @@ before_script:
 
 #------------------------------
 # Build
-script: pwd && bundle exec rake
+script: bundle exec rake
