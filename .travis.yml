@@ -11,14 +11,17 @@ cache: bundler
 
 #------------------------------
 # Update the node version - see http://austinpray.com/ops/2015/09/20/change-travis-node-version.html
-node_js:
-  - "5"
-#env:
-#  - TRAVIS_NODE_VERSION="5"
-#
-#install:
-#  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-#  - npm install
+env:
+  - TRAVIS_NODE_VERSION="5"
+
+install:
+  - pwd
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+  - npm install
+
+# ^^^ breaks badly with:
+#   $ bundle exec rake
+#   Could not find gem 'rspec' in any of the gem sources listed in your Gemfile or available on this machine.
 
 #------------------------------
 # Setup
@@ -37,4 +40,4 @@ before_script:
 
 #------------------------------
 # Build
-script: bundle exec rake
+script: pwd && bundle exec rake
