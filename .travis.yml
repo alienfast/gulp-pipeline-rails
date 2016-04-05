@@ -3,6 +3,9 @@ rvm:
   - 2.2.2
   - ruby-head
 
+notifications:
+  email: false
+
 matrix:
   allow_failures:
     - rvm: ruby-head
@@ -10,20 +13,34 @@ matrix:
 cache: bundler
 
 #------------------------------
+# capybara-webkit setup
+# copied from https://github.com/thoughtbot/capybara-webkit/blob/master/.travis.yml
+env:
+  global:
+    - BUNDLE_JOBS=4
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    - QMAKE=/usr/lib/x86_64-linux-gnu/qt4/bin/qmake
+
+addons:
+  apt:
+    sources:
+      - ubuntu-sdk-team
+    packages:
+      - libqt5webkit5-dev
+      - qtdeclarative5-dev
+
+#------------------------------
 # Setup
+
 before_install:
   - nvm install node 5
 
 before_script:
   - node -v
   - bash -l rvm env --path --ruby-version
-
   # install Gulp 4 CLI tools globally from 4.0 GitHub branch
-  #   (had problems with public key denied on branch so had to use https tarball)
-  #- npm install gulpjs/gulp-cli#4.0 -g
-  #- npm install git://github.com/gulpjs/gulp-cli#4.0 -g
   - npm install https://github.com/gulpjs/gulp-cli/tarball/4.0 -g
 
 #------------------------------
 # Build
-script: bundle exec rake
+script: xvfb-run bundle exec rake

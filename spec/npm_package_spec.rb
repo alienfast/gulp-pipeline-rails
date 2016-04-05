@@ -6,7 +6,7 @@ module Gulp
       describe NpmPackage do
         it 'should read jquery version' do
           npmPackage = NpmPackage.new
-          expect(npmPackage.dependency_version('jquery')).to eq '2.2.2'
+          expect(npmPackage.dependency_version('jquery')).to eq '2.2.3'
         end
       end
     end
