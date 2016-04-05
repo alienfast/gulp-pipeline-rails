@@ -25,12 +25,12 @@ cache: bundler
 
 #------------------------------
 # Setup
+before_install:
+  - nvm install node 5
+
 before_script:
   - node -v
-  - which bash
   - bash -l rvm env --path --ruby-version
-  # update npm
-  - npm install npm -g
 
   # install Gulp 4 CLI tools globally from 4.0 GitHub branch
   #   (had problems with public key denied on branch so had to use https tarball)
