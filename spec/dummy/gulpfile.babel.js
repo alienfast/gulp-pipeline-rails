@@ -9,7 +9,7 @@ const namedExports = {}
 
 
 gulp.registry(new RailsRegistry({
-  debug: true,
+  //debug: true,
   RollupIife: {
     commonjs: {
       options: {
