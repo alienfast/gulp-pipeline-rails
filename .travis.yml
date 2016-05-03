@@ -33,7 +33,7 @@ addons:
 # Setup
 
 before_install:
-  - nvm install node 5
+  - nvm install 5
 
 before_script:
   - node -v

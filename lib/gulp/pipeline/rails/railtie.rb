@@ -63,6 +63,19 @@ module Gulp
           ActiveSupport.on_load(:action_view) do
             include Gulp::Pipeline::Rails::Helper
           end
+
+          # if trailblazer, need to override this helper directly for #compute_asset_path
+          # if defined?(Cell::Concept)
+          #   module ActionView
+          #     module Helpers
+          #       module AssetUrlHelper
+          #         def self.included(base)
+          #           base.include Gulp::Pipeline::Rails::Helper
+          #         end
+          #       end
+          #     end
+          #   end
+          # end
         end
       end
     end

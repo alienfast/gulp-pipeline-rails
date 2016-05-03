@@ -55,10 +55,18 @@ And then execute:
     import gulp from 'gulp'
     
     // minimal setup with no overrides config
-    gulp.registry(new RailsRegistry({}))
+    gulp.registry(new RailsRegistry())
     ```
+    
+    This creates all the tasks you need, view them with `gulp --tasks`.  Notable tasks:
+    
+    - `gulp` runs the `default` task which builds all assets for development
+    - For development, you my want to
+      - run individual watches for speed such as `gulp css:watch js:watch images:watch`
+      - use the all-in-one `gulp default:watch` will watch all asset sources and run `default`
+    - `gulp all` runs `default` then `digest` which is a full clean build with revisioned assets for production
 
-2. Startup rails and you should be serving from your new asset pipeline!
+1. Startup rails and you should be serving from your new asset pipeline!
     
 ## Goals
 This gem is actually quite simple, and most of these goals are accomplished by the primary project [gulp-pipleline](https://github.com/alienfast/gulp-pipeline).  Nonetheless, if you are coming from rails, this is what to expect:
