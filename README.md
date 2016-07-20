@@ -1,4 +1,4 @@
-# gulp-pipeline-rails
+# gulp-pipeline-rails [abandoned] - free to a good home
 [![Gem Version](https://badge.fury.io/rb/gulp-pipeline-rails.svg)](https://rubygems.org/gems/gulp-pipeline-rails)
 [![Build Status](https://travis-ci.org/alienfast/gulp-pipeline-rails.svg)](https://travis-ci.org/alienfast/gulp-pipeline-rails)
 
